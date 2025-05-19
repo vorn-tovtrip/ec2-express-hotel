@@ -1,0 +1,39 @@
+# IDEs and editors
+.idea/
+.vscode/
+
+# Node modules
+node_modules/
+
+# Build and temp directories
+build/
+tmp/
+temp/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# SSL/Cert files
+express-dev.pem
+
+# Docker-related
+docker-compose.override.yml
+docker-compose.dev.yml
+docker-compose*.yml
+*.pid
+
+# NGINX
+nginx.conf
+*.log
+
+# Ignore output from Docker
+*.tar

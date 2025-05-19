@@ -1,0 +1,11 @@
+import { Router } from "express";
+import userRoute from "./user.route";
+import profileRoute from "./profile.route";
+import hotelRoute from "./hotel.route";
+import amentitiesRoute from "./amentities.route";
+const router = Router();
+router.use("/users", userRoute);
+router.use("/profiles", profileRoute);
+router.use("/hotels", hotelRoute);
+router.use("/amentities", amentitiesRoute);
+export default router;
