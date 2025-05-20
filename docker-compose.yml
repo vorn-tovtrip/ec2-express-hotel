@@ -27,44 +27,18 @@ services:
       - ./:/app
       - /app/node_modules
     command: ["npm", "run", "dev"]
-    depends_on:
-      - postgres_db
-  backend_dev_two:
-    build: .
-    image: vorni/hotel-express-ec2
-    ports:
-      - 3003:3010
-    env_file:
-      - .env.dev
-    environment:
-      - POSTGRES_HOST=postgres_db
-      - POSTGRES_PORT=5432
-      - SERVERPORT=3010
-      - NODE_ENV=development
-      - SERVER=server_dev_2
-    volumes:
-      - ./:/app
-      - /app/node_modules
-    command: ["npm", "run", "dev"]
-    depends_on:
-      - postgres_db
-  backend_dev_three:
-    build: .
-    image: vorni/hotel-express-ec2
-    ports:
-      - 3004:3010
-    env_file:
-      - .env.dev
-    environment:
-      - POSTGRES_HOST=postgres_db
-      - POSTGRES_PORT=5432
-      - SERVERPORT=3010
-      - NODE_ENV=development
-      - SERVER=server_dev_3
-    volumes:
-      - ./:/app
-      - /app/node_modules
-    command: ["npm", "run", "dev"]
+    deploy:
+      mode: replicated
+      replicas: 4
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+      update_config:
+        parallelism: 2
+        delay: 10s
+        order: stop-first
+        failure_action: rollback
     depends_on:
       - postgres_db
   adminer:
