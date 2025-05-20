@@ -2,7 +2,7 @@ import compression from "compression";
 import "reflect-metadata";
 
 import session from "express-session";
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import { rateLimit } from "express-rate-limit";
 import helmet from "helmet";
 import morgan from "morgan";
@@ -13,9 +13,11 @@ import {
   notFoundMiddleWare,
 } from "./middleware";
 import mainRoute from "./routes";
+import { handleResponse } from "./utils";
 
 const createAppServer = () => {
   const app = express();
+  app.set("trust proxy", true);
   app.use(
     session({
       saveUninitialized: false,
@@ -45,6 +47,16 @@ const createAppServer = () => {
   app.use(globalRateLimit);
   app.get("/", (req: Request, res: Response) => {
     return res.redirect("https://expressjs.com/");
+  });
+  app.use("/healths", (req: Request, res: Response, next: NextFunction) => {
+    return handleResponse(res, 200, "success", {
+      method: req.method,
+      status: req.statusCode,
+      info: req.ips,
+      protocol: req.protocol,
+      host: req.headers.host,
+      url: req.url,
+    });
   });
   app.use("/api/v1/", mainRoute);
   app.use(notFoundMiddleWare);
