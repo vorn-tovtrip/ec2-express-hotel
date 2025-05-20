@@ -26,9 +26,7 @@ Thumbs.db
 express-dev.pem
 
 # Docker-related
-docker-compose.override.yml
-docker-compose.dev.yml
-docker-compose*.yml
+docker-compose.prod.yml
 *.pid
 
 # NGINX

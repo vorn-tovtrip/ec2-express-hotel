@@ -1,0 +1,35 @@
+services:
+  postgres_db:
+    image: postgres
+    restart: always
+    volumes:
+      - prod_dev:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: 22223333
+      POSTGRES_DB: ecommerce_dev
+      POSTGRES_USER: root
+    ports:
+      - "5434:5432"
+  backend_dev:
+    build: .
+    ports:
+      - 3002:3010
+    env_file:
+      - .env.dev
+    environment:
+      - POSTGRES_HOST=postgres_db
+      - POSTGRES_PORT=5432
+      - SERVERPORT=3010
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    command: ["npm", "run", "dev"]
+    depends_on:
+      - postgres_db
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8090:8080
+volumes:
+  prod_dev:
