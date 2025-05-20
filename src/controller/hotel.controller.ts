@@ -9,7 +9,7 @@ class HotelController {
   }
   async findHotels(req: Request, res: Response) {
     const data = await this.hotelService.getAllHotel();
-    return handleResponse(res, 200, "success", data);
+    return handleResponse(res, 200, "xxxx", data);
   }
   async createHotel(req: Request<{}, {}, CreateHotelDto>, res: Response) {
     const payload = req.body;

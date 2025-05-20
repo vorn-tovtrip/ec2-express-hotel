@@ -24,6 +24,17 @@ services:
       - NODE_ENV=development
       - SERVER=server_dev_1
     command: ["npm", "run", "dev"]
+    deploy:
+      mode: replicated
+      replicas: 4
+      restart_policy:
+        condition: any
+        delay: 5s
+      update_config:
+        parallelism: 2
+        delay: 10s
+        order: stop-first
+        failure_action: rollback
     depends_on:
       - postgres_db
   adminer:
