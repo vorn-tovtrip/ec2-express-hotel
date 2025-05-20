@@ -33,7 +33,6 @@ services:
       restart_policy:
         condition: any
         delay: 5s
-        max_attempts: 3
       update_config:
         parallelism: 2
         delay: 10s
