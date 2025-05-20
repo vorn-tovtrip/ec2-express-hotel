@@ -23,9 +23,6 @@ services:
       - SERVERPORT=3010
       - NODE_ENV=development
       - SERVER=server_dev_1
-    volumes:
-      - ./:/app
-      - /app/node_modules
     command: ["npm", "run", "dev"]
     deploy:
       mode: replicated
