@@ -13,7 +13,6 @@ services:
   backend_dev:
     build: .
     image: vorni/hotel-express-ec2
-    platform: linux/amd64
     ports:
       - 3002:3010
     env_file:
