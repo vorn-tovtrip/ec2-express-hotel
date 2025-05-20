@@ -21,6 +21,8 @@ services:
       - POSTGRES_HOST=postgres_db
       - POSTGRES_PORT=5432
       - SERVERPORT=3010
+      - NODE_ENV=development
+      - SECRET=123
     volumes:
       - ./:/app
       - /app/node_modules
