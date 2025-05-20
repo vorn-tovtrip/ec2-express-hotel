@@ -48,7 +48,7 @@ const createAppServer = () => {
   app.get("/", (req: Request, res: Response) => {
     return res.redirect("https://expressjs.com/");
   });
-  app.use("/healths", (req: Request, res: Response, next: NextFunction) => {
+  app.use("/health", (req: Request, res: Response, next: NextFunction) => {
     return handleResponse(res, 200, "success", {
       method: req.method,
       status: req.statusCode,
