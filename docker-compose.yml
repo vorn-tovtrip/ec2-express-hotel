@@ -27,6 +27,17 @@ services:
     command: ["npm", "run", "dev"]
     depends_on:
       - postgres_db
+    deploy:
+      mode: replicated
+      replicas: 4
+      restart_policy:
+        condition: any
+        delay: 5s
+      update_config:
+        parallelism: 2
+        delay: 10s
+        order: stop-first
+        failure_action: rollback
   adminer:
     image: adminer
     restart: always
