@@ -22,7 +22,45 @@ services:
       - POSTGRES_PORT=5432
       - SERVERPORT=3010
       - NODE_ENV=development
-      - SECRET=123
+      - SERVER=server_dev_1
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    command: ["npm", "run", "dev"]
+    depends_on:
+      - postgres_db
+  backend_dev_two:
+    build: .
+    image: vorni/hotel-express-ec2
+    ports:
+      - 3003:3010
+    env_file:
+      - .env.dev
+    environment:
+      - POSTGRES_HOST=postgres_db
+      - POSTGRES_PORT=5432
+      - SERVERPORT=3010
+      - NODE_ENV=development
+      - SERVER=server_dev_2
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    command: ["npm", "run", "dev"]
+    depends_on:
+      - postgres_db
+  backend_dev_three:
+    build: .
+    image: vorni/hotel-express-ec2
+    ports:
+      - 3004:3010
+    env_file:
+      - .env.dev
+    environment:
+      - POSTGRES_HOST=postgres_db
+      - POSTGRES_PORT=5432
+      - SERVERPORT=3010
+      - NODE_ENV=development
+      - SERVER=server_dev_3
     volumes:
       - ./:/app
       - /app/node_modules
