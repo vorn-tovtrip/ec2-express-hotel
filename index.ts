@@ -6,7 +6,7 @@ import createAppServer from "./src/server";
 PostgresDataSource.initialize().then(() => {
   const app = createAppServer();
   console.log("data base has been init");
-  const server = app.listen(AppEnv.SERVERPORT, "0.0.0.0", async () => {
+  const server = app.listen(AppEnv.SERVERPORT, async () => {
     // dbconnect();
     console.log("Welcome to express is startings", "Port", AppEnv.SERVERPORT);
   });
