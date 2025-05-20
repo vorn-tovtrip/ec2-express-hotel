@@ -14,7 +14,7 @@ class HotelController {
   async createHotel(req: Request<{}, {}, CreateHotelDto>, res: Response) {
     const payload = req.body;
     const data = await this.hotelService.createHotel(payload);
-    return handleResponse(res, 200, "success", data);
+    return handleResponse(res, 200, "hotel has been found", data);
   }
   async deleteHotel(req: Request<{ id: string }, {}, {}>, res: Response) {
     const { id } = req.params;
