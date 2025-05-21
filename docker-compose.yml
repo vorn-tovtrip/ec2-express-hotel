@@ -17,8 +17,8 @@ services:
       - "443:443"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - /etc/letsencrypt/live/vorn-hotel.jumpingcrab.com/fullchain.pem:/etc/letsencrypt/live/vorn-hotel.jumpingcrab.com/fullchain.pem:ro
-      - /etc/letsencrypt/live/vorn-hotel.jumpingcrab.com/privkey.pem:/etc/letsencrypt/live/vorn-hotel.jumpingcrab.com/privkey.pem:ro
+      - /etc/letsencrypt/live/vorn-hotel.jumpingcrab.com:/etc/nginx/certs:ro
+      - /etc/letsencrypt/archive:/etc/nginx/archive:ro # Mount archive to follow symlinks
 
   backend_dev:
     build: .
