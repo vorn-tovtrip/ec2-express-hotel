@@ -30,7 +30,7 @@ docker-compose.prod.yml
 *.pid
 
 # NGINX
-nginx.conf
+
 *.log
 
 # Ignore output from Docker
