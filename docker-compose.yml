@@ -41,13 +41,8 @@ services:
         delay: 5s
       update_config:
         parallelism: 2
-        delay: 10s
+        delay: 15s
         order: stop-first
         failure_action: rollback
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8090:8080
 volumes:
   prod_dev:
