@@ -16,7 +16,6 @@ services:
       - "80:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
-
   backend_dev:
     build: .
     image: vorni/hotel-express-ec2
