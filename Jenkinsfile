@@ -1,9 +1,9 @@
 pipeline {
     agent any
-
     stages {
         stage('Build') {
             steps {
+                cleanWs()
                 echo 'Building the project...'
                
             }
@@ -21,6 +21,11 @@ pipeline {
                 echo 'Deploying the project...'
                 
             }
+        }
+    }
+    post{
+        success {
+            echo 'Task has completed'
         }
     }
 }
