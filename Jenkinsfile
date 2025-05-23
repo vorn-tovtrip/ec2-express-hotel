@@ -23,7 +23,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                echo 'Running gitshub...'
+                echo 'Running gitshussb...'
            
             }
         }
