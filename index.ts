@@ -15,6 +15,6 @@ PostgresDataSource.initialize().then(() => {
     console.log("Express js server is up running");
   });
   server.on("close", async () => {
-    console.log("Express js server is shutting downs");
+    console.log("Express js servers is shutting downs");
   });
 });
