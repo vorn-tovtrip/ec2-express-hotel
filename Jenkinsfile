@@ -10,12 +10,11 @@ pipeline {
         }
         stage('Ssh to agent') {
             steps {
-                sshagent(['ssh-express-hotel']) {
+        sshagent(['ssh-express-hotel']) {
  sh '''
     ls -la
     pwd
-    chmod 400 express-dev.pem
-    ssh -i express-dev.pem -o StrictHostKeyChecking=no ec2-user@3.83.158.214 "echo Connected && whoami && uptime"
+    ssh -o StrictHostKeyChecking=no ec2-user@3.83.158.214 "echo Connected && whoami && uptime"
 '''
 
                      }
