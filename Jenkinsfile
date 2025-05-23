@@ -14,7 +14,7 @@ pipeline {
  sh '''
     ls -la
     pwd
-    ssh -o StrictHostKeyChecking=no ec2-user@3.83.158.214 "echo Connected && whoami && uptime"
+    ssh -o StrictHostKeyChecking=no ec2-user@3.83.158.214 ls
 '''
 
                      }
