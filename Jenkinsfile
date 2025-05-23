@@ -1,11 +1,25 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Pre') {
             steps {
                 cleanWs()
-                echo 'Building the project...'
+                echo 'Cleaning the workspace...'
                
+            }
+        }
+        stage('Ssh to agent') {
+            steps {
+                sshagent(['ssh-express-hotel']) {
+   sh '''
+        ssh -o StrictHostKeyChecking=no -l cloudbees 3.83.158.214 "
+            echo Connected to $(hostname);
+            ls -la;
+            whoami;
+            uptime
+        "
+    '''
+                     }
             }
         }
 
@@ -20,8 +34,10 @@ pipeline {
             steps {
                 echo 'Deploying the project...'
                 
+                
             }
         }
+        
     }
     post{
         success {
