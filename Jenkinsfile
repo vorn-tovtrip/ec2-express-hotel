@@ -12,13 +12,8 @@ pipeline {
             steps {
                 sshagent(['ssh-express-hotel']) {
    sh '''
-        ssh -o StrictHostKeyChecking=no -l cloudbees 3.83.158.214 "
-            echo Connected to $(hostname);
-            echo I am in;
-            ls -la;
-            whoami;
-            uptime
-        "
+          ssh -o StrictHostKeyChecking=no ec2-user@3.83.158.214 "echo Connected && whoami && uptime"
+
     '''
                      }
             }
