@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Ssh to agent') {
             steps {
-        sshagent(credentials: ['ec2']) {
+        sshagent('ec2') {
  sh '''
     ls -la
     pwd
@@ -30,7 +30,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                echo 'Deploying the project...'
+                echo 'Deploying thes project...'
                 
                 
             }
