@@ -4,7 +4,7 @@ pipeline {
         stage('Pre') {
             steps {
               
-                echo 'Cleaning the workspace...'
+                echo 'Cleaning the workspace..ss.'
                
             }
         }
