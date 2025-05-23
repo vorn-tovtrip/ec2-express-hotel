@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Ssh to agent') {
             steps {
-        sshagent(credentials: ['ssh-express-hotel']) {
+        sshagent(credentials: ['ec2']) {
  sh '''
     ls -la
     pwd
