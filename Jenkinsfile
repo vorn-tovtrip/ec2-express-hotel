@@ -14,6 +14,7 @@ pipeline {
    sh '''
         ssh -o StrictHostKeyChecking=no -l cloudbees 3.83.158.214 "
             echo Connected to $(hostname);
+            echo I am in;
             ls -la;
             whoami;
             uptime
