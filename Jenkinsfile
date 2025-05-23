@@ -12,7 +12,7 @@ pipeline {
             steps {
                 sshagent(['ssh-express-hotel']) {
    sh '''
-          ssh -o StrictHostKeyChecking=no ec2-user@3.83.158.214 "echo Connected && whoami && uptime"
+          ssh -i express-dev.pem -o StrictHostKeyChecking=no ec2-user@3.83.158.214 "echo Connected && whoami && uptime"
 
     '''
                      }
