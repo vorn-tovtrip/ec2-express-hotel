@@ -8,7 +8,7 @@ PostgresDataSource.initialize().then(() => {
   console.log("data base has been init");
   const server = app.listen(AppEnv.SERVERPORT, "0.0.0.0", async () => {
     // dbconnect();
-    console.log("Welcomes to express is startings", "Port", AppEnv.SERVERPORT);
+    console.log("Welcome to express is startings", "Port", AppEnv.SERVERPORT);
   });
   server.on("connect", (req) => {
     console.log("Express js server is up running");
