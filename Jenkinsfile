@@ -8,11 +8,6 @@ pipeline {
 
     stages {
 
-        agent{
-            docker {
-        
-            }
-        }
         stage('Pre Deploy Docker') {
             steps {
                 cleanWs()
