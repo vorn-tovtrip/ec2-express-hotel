@@ -10,16 +10,21 @@ pipeline {
 
         stage('Pre Deploy Docker') {
             steps {
-                // cleanWs()
+                // cleanWs()    
                 echo 'Cleaning the workspace...'
             }
      
         }
 
-    stage('Docker Push Image') {
+stage('Build and Push Docker Image') {
   steps {
     withCredentials([usernamePassword(credentialsId: 'docker-hub-registry', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-      sh "docker login -u $DOCKER_USER -p $DOCKER_PASS"
+      sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+
+      // Build the Docker image
+      sh 'docker build -t vorni/hotel-express-ec2 .'
+
+      // Push the Docker image
       sh 'docker push vorni/hotel-express-ec2'
     }
   }
