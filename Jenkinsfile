@@ -4,7 +4,7 @@ pipeline {
     environment {
         EC2_USER = "ec2-user"
         EC2_HOST = "3.83.158.214"
-        BACK_END_VERSION ="1.0.1"
+        BACK_END_VERSION ="1.0.${BUILD_ID}"
     }
 
     stages {
@@ -34,9 +34,10 @@ stage('Build and Push Docker Image') {
         stage('SSH EC2 AWS') {
             steps {
                 withCredentials([file(credentialsId: 'ec2-pem', variable: 'PEM_FILE')]) {
-                 sh '''
+                 sh """
   ssh -o StrictHostKeyChecking=no -i "$PEM_FILE" "$EC2_USER@$EC2_HOST"
- '''
+  echo $BACK_END_VERSION >> .env.dev
+ """
                 }
             }
 
