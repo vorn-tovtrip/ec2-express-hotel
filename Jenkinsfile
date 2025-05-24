@@ -10,7 +10,7 @@ pipeline {
 
         stage('Pre Deploy Docker') {
             steps {
-                cleanWs()
+                // cleanWs()
                 echo 'Cleaning the workspace...'
             }
      
