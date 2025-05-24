@@ -53,10 +53,10 @@ stage('Build and Push Docker Image') {
     withCredentials([file(credentialsId: 'ec2-pem', variable: 'PEM_FILE')]) {
 sh '''
   chmod 400 "$PEM_FILE"
-  ssh -o StrictHostKeyChecking=no -i "$PEM_FILE" "$EC2_USER@$EC2_HOST" << 'EOF'
-  
+  ssh -t -o StrictHostKeyChecking=no -i "$PEM_FILE" "$EC2_USER@$EC2_HOST" << 'EOF'
 
     cd /backend/ec2-express-hotel
+    pwd
     echo "Pulling git"
     git pull
     docker pull vorni/hotel-express-ec2
