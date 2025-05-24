@@ -33,9 +33,9 @@ stage('Build and Push Docker Image') {
         stage('SSH EC2 AWS') {
             steps {
                 withCredentials([file(credentialsId: 'ec2-pem', variable: 'PEM_FILE')]) {
-                 sh """
+                 sh '''
   ssh -o StrictHostKeyChecking=no -i "$PEM_FILE" "$EC2_USER@$EC2_HOST"
-  """
+ '''
                 }
             }
 
@@ -51,7 +51,7 @@ stage('Build and Push Docker Image') {
   stage('Deploy hotel express') {
   steps {
     withCredentials([file(credentialsId: 'ec2-pem', variable: 'PEM_FILE')]) {
-   sh """
+sh '''
   chmod 400 "$PEM_FILE"
   ssh -o StrictHostKeyChecking=no -i "$PEM_FILE" "$EC2_USER@$EC2_HOST" << 'EOF'
     docker --version
@@ -59,7 +59,7 @@ stage('Build and Push Docker Image') {
     docker stack deploy -c docker-compose.yml hotel
     docker stack services hotel
 EOF
-"""
+'''
 
 
     }
