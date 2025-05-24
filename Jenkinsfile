@@ -16,14 +16,15 @@ pipeline {
      
         }
 
-        stage('Docker Push Image') {
-      steps {
-             withCredentials([usernameColonPassword(credentialsId: 'docker-hub-registry', variable: ''), usernameColonPassword(credentialsId: 'docker-hub-registry', variable: 'docker-hub-registry'), usernamePassword(credentialsId: 'docker-hub-registry', passwordVariable: 'pW-4ZvZ*anjpq3W', usernameVariable: 'vorni')]) {
-          sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          sh 'docker push vorni/hotel-express-ec2'
+    stage('Docker Push Image') {
+  steps {
+    withCredentials([usernamePassword(credentialsId: 'docker-hub-registry', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+      sh "docker login -u $DOCKER_USER -p $DOCKER_PASS"
+      sh 'docker push vorni/hotel-express-ec2'
+    }
+  }
 }
-            }
-        }
+
 
         stage('SSH EC2') {
             steps {
