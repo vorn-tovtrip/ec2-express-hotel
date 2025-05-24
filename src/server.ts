@@ -54,6 +54,11 @@ const createAppServer = () => {
       url: req.url,
     });
   });
+  app.use("/status", (req: Request, res: Response, next: NextFunction) => {
+    return handleResponse(res, 200, "success", {
+      status: res.statusCode,
+    });
+  });
   app.use("/api/v1/", mainRoute);
   app.use(notFoundMiddleWare);
   app.use(catchAllErrorMiddleware);
