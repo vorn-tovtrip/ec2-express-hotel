@@ -26,7 +26,7 @@ pipeline {
 }
 
 
-        stage('SSH EC2') {
+        stage('SSH EC2 AWS') {
             steps {
                 withCredentials([file(credentialsId: 'ec2-pem', variable: 'PEM_FILE')]) {
                  sh """
