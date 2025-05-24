@@ -52,7 +52,7 @@ stage('Build and Push Docker Image') {
   stage('Deploy hotel express') {
   steps {
     withCredentials([file(credentialsId: 'ec2-pem', variable: 'PEM_FILE')]) {
-sh '''
+sh """
   chmod 400 "$PEM_FILE"
   ssh -t -o StrictHostKeyChecking=no -i "$PEM_FILE" "$EC2_USER@$EC2_HOST" << 'EOF'
 
@@ -61,12 +61,13 @@ pwd
     pwd
     echo "Pulling git"
     git pull
-    echo $BACK_END_VERSION >> .env.dev
     docker pull vorni/hotel-express-ec2
+    echo $BACK_END_VERSION >> .env.dev
+     cat .env.dev
     docker stack deploy -c docker-compose.yml hotel
     docker stack services hotel
 EOF
-'''
+"""
 
 
     }
