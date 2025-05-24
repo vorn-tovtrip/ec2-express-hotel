@@ -50,12 +50,8 @@ const createAppServer = () => {
   });
   app.use("/health", (req: Request, res: Response, next: NextFunction) => {
     return handleResponse(res, 200, "success", {
-      // method: req.method,
-      // status: req.statusCode,
-      // info: req.ips,
-      // protocol: req.protocol,
-      // // host: req.headers.host,
-      // url: req.url,
+      protocol: req.protocol,
+      url: req.url,
     });
   });
   app.use("/api/v1/", mainRoute);

@@ -54,8 +54,7 @@ stage('Build and Push Docker Image') {
 sh '''
   chmod 400 "$PEM_FILE"
   ssh -t -o StrictHostKeyChecking=no -i "$PEM_FILE" "$EC2_USER@$EC2_HOST" << 'EOF'
-ls /backend
-ls /backend/ec2-express-hotel
+
 pwd
     cd backend/ec2-express-hotel
     pwd
