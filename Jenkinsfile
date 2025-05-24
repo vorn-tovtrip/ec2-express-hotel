@@ -63,6 +63,8 @@ pwd
     git pull
     docker pull vorni/hotel-express-ec2
     echo 'backend version is $BACK_END_VERSION '
+    pwd
+     echo 'BACK_END_VERSION=$BACK_END_VERSION'>>.env.dev
      cat .env.dev
     docker stack deploy -c docker-compose.yml hotel
     docker stack services hotel
