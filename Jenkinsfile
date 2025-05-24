@@ -13,7 +13,11 @@ pipeline {
                 cleanWs()
                 echo 'Cleaning the workspace...'
             }
-            steps {
+     
+        }
+
+        stage('Docker Push Image') {
+      steps {
              withCredentials([usernameColonPassword(credentialsId: 'docker-hub-registry', variable: ''), usernameColonPassword(credentialsId: 'docker-hub-registry', variable: 'docker-hub-registry'), usernamePassword(credentialsId: 'docker-hub-registry', passwordVariable: 'pW-4ZvZ*anjpq3W', usernameVariable: 'vorni')]) {
           sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
           sh 'docker push vorni/hotel-express-ec2'
