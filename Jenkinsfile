@@ -54,7 +54,7 @@ stage('Build and Push Docker Image') {
 sh '''
   chmod 400 "$PEM_FILE"
   ssh -o StrictHostKeyChecking=no -i "$PEM_FILE" "$EC2_USER@$EC2_HOST" << 'EOF'
-    docker --version
+   git pull
     docker pull vorni/hotel-express-ec2
     docker stack deploy -c docker-compose.yml hotel
     docker stack services hotel
