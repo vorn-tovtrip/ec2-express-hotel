@@ -7,21 +7,35 @@ pipeline {
     }
 
     stages {
-        stage('Pre') {
+
+        agent{
+            docker {
+        
+            }
+        }
+        stage('Pre Deploy Docker') {
             steps {
+                cleanWs()
                 echo 'Cleaning the workspace...'
+            }
+            steps {
+             withCredentials([usernameColonPassword(credentialsId: 'docker-hub-registry', variable: ''), usernameColonPassword(credentialsId: 'docker-hub-registry', variable: 'docker-hub-registry'), usernamePassword(credentialsId: 'docker-hub-registry', passwordVariable: 'pW-4ZvZ*anjpq3W', usernameVariable: 'vorni')]) {
+          sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+          sh 'docker push vorni/hotel-express-ec2'
+}
             }
         }
 
-        stage('SSH to EC2') {
+        stage('SSH EC2') {
             steps {
                 withCredentials([file(credentialsId: 'ec2-pem', variable: 'PEM_FILE')]) {
-                    sh '''
-                        chmod 400 "$PEM_FILE"
-                        ssh -o StrictHostKeyChecking=no -i "$PEM_FILE" "$EC2_USER@$EC2_HOST" "echo '✅ Connected to EC2 instance!'"
-                    '''
+                 sh """
+  ssh -o StrictHostKeyChecking=no -i "$PEM_FILE" "$EC2_USER@$EC2_HOST"
+  """
                 }
             }
+
+           
         }
 
         stage('Test') {
@@ -30,11 +44,23 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
-            steps {
-                echo 'Deploying the project...'
-            }
-        }
+  stage('Deploy hotel express') {
+  steps {
+    withCredentials([file(credentialsId: 'ec2-pem', variable: 'PEM_FILE')]) {
+      sh """
+        chmod 400 "$PEM_FILE"
+        ssh -o StrictHostKeyChecking=no -i "$PEM_FILE" "$EC2_USER@$EC2_HOST" << 'EOF'
+         
+         docker --version
+         docker pull vorni/hotel-express-ec2 
+         docker stack deploy -c docker-compose.yml hotel
+         docker stack services hotel
+        EOF
+      """
+    }
+  }
+}
+
     }
 
     post {
