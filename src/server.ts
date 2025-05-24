@@ -39,7 +39,7 @@ const createAppServer = () => {
     limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
     message: {
       status: 429,
-      message: "Too many request, please try again later...",
+      message: "Too many requesting, please try again later...",
     },
   });
 
