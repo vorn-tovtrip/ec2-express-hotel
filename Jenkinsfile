@@ -4,6 +4,7 @@ pipeline {
     environment {
         EC2_USER = "ec2-user"
         EC2_HOST = "3.83.158.214"
+        version ="1.0.1"
     }
 
     stages {
