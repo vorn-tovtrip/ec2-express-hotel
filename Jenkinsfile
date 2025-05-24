@@ -9,8 +9,7 @@ pipeline {
     stages {
 
         stage('Pre Deploy Docker') {
-            steps {
-                cleanWs()    
+            steps {  
                 echo 'Cleaning the workspace...'
             }
      
@@ -70,7 +69,9 @@ stage('Build and Push Docker Image') {
 
     post {
         success {
+            cleanWs()  
             echo 'Task has completed'
+            
         }
     }
 }
