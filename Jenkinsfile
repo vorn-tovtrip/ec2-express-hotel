@@ -36,7 +36,6 @@ stage('Build and Push Docker Image') {
                 withCredentials([file(credentialsId: 'ec2-pem', variable: 'PEM_FILE')]) {
                  sh """
   ssh -o StrictHostKeyChecking=no -i "$PEM_FILE" "$EC2_USER@$EC2_HOST"
-  echo $BACK_END_VERSION >> .env.dev
  """
                 }
             }
@@ -62,6 +61,7 @@ pwd
     pwd
     echo "Pulling git"
     git pull
+    echo $BACK_END_VERSION >> .env.dev
     docker pull vorni/hotel-express-ec2
     docker stack deploy -c docker-compose.yml hotel
     docker stack services hotel
